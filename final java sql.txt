@@ -1,0 +1,38 @@
+package db_connection;
+import java.sql.*;
+public class JavaApplication2 {
+ public static void main(String[] args) {
+  try {
+   Class.forName("com.mysql.jdbc.Driver");
+   Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/final final", "root", "");
+   Statement stmt = con.createStatement();
+   ResultSet rs = stmt.executeQuery("SELECT \n" +
+"COUSTMER.c_id,COUSTMER.c_name,CONTRACT.amounts,CONTRACT.installment\n" +
+"FROM COUSTMER \n" +
+"INNER JOIN CONTRACT\n" +
+"ON CONTRACT.installment = 'n' ");
+   while (rs.next())
+    System.out.println(rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3)+ "  " + rs.getString(4));
+   ResultSet rs1 = stmt.executeQuery(" SELECT A_ID FROM apartment WHERE price = 900000");
+   System.out.println("PRICE");
+   while (rs1.next())
+    System.out.println(rs1.getInt(1));
+   ResultSet rs2 = stmt.executeQuery(" SELECT A_ID FROM apartment WHERE SOLD ='N'");
+   System.out.println("SOLD");
+   while (rs2.next())
+    System.out.println(rs2.getInt(1));
+   ResultSet rs3 = stmt.executeQuery(" SELECT A_ID FROM apartment INNER JOIN CONTRACT ON apartment.SOLD = 'Y' AND monthname(date)='February'");
+  System.out.println("MONTH");
+   while (rs3.next())
+    System.out.println(rs3.getInt(1));
+   ResultSet rs4 = stmt.executeQuery(" SELECT apartment.A_ID FROM apartment INNER JOIN contract ON contract.amounts>60000 AND contract.COUNT>5 AND apartment.price=contract.COUNT*contract.amounts");
+  System.out.println("A_ID");
+   while (rs4.next())
+    System.out.println(rs4.getInt(1));
+   con.close();
+  } catch (Exception e) {
+   System.out.println(e);
+  }
+ }
+
+}

@@ -1,0 +1,489 @@
+CREATE TABLE COMPANY(  
+
+  
+
+    C_ID INT,  
+
+  
+
+    COMPANY_name VARCHAR(50),  
+
+  
+
+PRIMARY KEY (C_ID)
+
+  
+
+);  
+
+  
+
+CREATE TABLE BRANCH(  
+
+  
+
+    B_id INT,  
+
+  
+
+    phone_number INT,  
+
+  
+
+    City VARCHAR(50),  
+
+  
+
+    st_no INT,  
+
+  
+
+    AREA INT,  
+
+  
+
+    C_ID INT,  
+
+  
+
+    PRIMARY KEY(B_id),  
+
+  
+
+constraint foreign key(C_ID)references COMPANY(C_ID)  
+
+  
+
+); CREATE TABLE Employee(  
+
+  
+
+    EMP_id INT,  
+
+  
+
+    emp_name VARCHAR(50),  
+
+  
+
+    B_id INT(50),  
+
+  
+
+    PRIMARY KEY(EMP_id),  
+
+  
+
+   CONSTRAINT FOREIGN KEY (B_id) REFERENCES BRANCH(B_id)  
+
+  
+
+); CREATE TABLE Rules(  
+
+  
+
+    Rule_id INT,  
+
+  
+
+    Rule_name VARCHAR(50),  
+
+  
+
+    EMP_id INT(50),  
+
+  
+
+    PRIMARY KEY(Rule_id),  
+
+  
+
+   CONSTRAINT FOREIGN KEY (EMP_id) REFERENCES Employee(EMP_id)  
+
+  
+
+); CREATE TABLE Project(  
+
+  
+
+    Project_id INT,  
+
+  
+
+    projectname VARCHAR(50),  
+
+  
+
+    st_no INT,  
+
+  
+
+    no_Building INT,  
+
+  
+
+    B_id INT,  
+
+  
+
+    description VARCHAR(100),  
+
+  
+
+    PRIMARY KEY(Project_id),  
+
+  
+
+   CONSTRAINT FOREIGN KEY (B_id) REFERENCES BRANCH(B_id)  
+
+  
+
+); CREATE TABLE BUilding(  
+
+  
+
+    Dimintions INT(100),  
+
+  
+
+    street_name VARCHAR(50),  
+
+  
+
+    AREA INT(100),  
+
+  
+
+    description VARCHAR(100),  
+
+  
+
+    B_id INT,  
+
+  
+
+    POSITION VARCHAR(50) NOT NULL,  
+
+  
+
+    no_apartments INT(50) NOT NULL,  
+
+  
+
+    B_name VARCHAR(50),  
+
+  
+
+    Project_id INT(50),  
+
+  
+
+    PRIMARY KEY(B_id),  
+
+  
+
+    CONSTRAINT FOREIGN KEY (Project_id) REFERENCES Project(Project_id)  
+
+  
+
+); CREATE TABLE COUSTMER(  
+
+  
+
+    c_id INT ,  
+
+  
+
+    c_name VARCHAR(50) NOT NULL,  
+
+  
+
+    PHONE INT,  
+
+  
+
+    JOP VARCHAR(50) NOT NULL,  
+
+  
+
+    PRIMARY KEY(c_id)  
+
+  
+
+);  
+
+  
+
+CREATE TABLE CONTRACT(  
+
+  COUNT INT,
+
+    installment CHAR NOT NULL,  
+
+  
+
+    amounts INT NOT NULL,  
+
+  
+
+    date DATE ,  
+
+  
+
+    co_id INT NOT NULL,  
+
+  
+
+    c_id INT,  
+
+  
+
+    PRIMARY KEY(co_id),  
+
+  
+
+  CONSTRAINT FOREIGN KEY (c_id) REFERENCES COUSTMER(c_id)  
+
+  
+
+);  
+
+  
+
+CREATE TABLE APARTMENT(  
+
+  
+
+    FLOOR INT NOT NULL,  
+
+  
+
+    AREA INT NOT NULL,  
+
+  
+
+    POSITION VARCHAR(50) NOT NULL,  
+
+  
+
+    price INT NOT NULL,  
+
+  
+
+    number_of_path_rooms INT NOT NULL,  
+
+  
+
+    number_of_rooms INT NOT NULL,  
+
+  
+
+    dimensions_ INT NOT NULL,  
+
+  
+
+    SOLD CHAR NOT NULL,  
+
+  
+
+    A_ID INT,  
+
+  
+
+    B_id INT,  
+
+  
+
+    c_id INT,  
+
+  
+
+    PRIMARY KEY(A_ID),  
+
+  
+
+   CONSTRAINT FOREIGN KEY (B_id) REFERENCES BUilding(B_id),  
+
+  
+
+   CONSTRAINT FOREIGN KEY (c_id) REFERENCES COUSTMER(c_id)
+     
+
+  
+
+);   INSERT INTO BUilding  
+
+  
+
+   
+
+  
+
+(Dimintions,area,street_name,position,description,no_apartments,B_id)    
+
+  
+
+   
+
+  
+
+values    
+
+  
+
+   
+
+  
+
+(100*100*100, 1000000,'23-ab','SEA','glass',10,1),   
+
+  
+
+   
+
+  
+
+(90*90*90, 729000,'23-abc','mall','garden',15,2),   
+
+  
+
+   
+
+  
+
+(80*80*80, 512000,'23-abcd','nail','different ',20,3),   
+
+  
+
+   
+
+  
+
+(70*70*70, 343000,'23-abcde','SEA2','classic',25,4),   
+
+  
+
+   
+
+  
+
+(60*60*60, 216000,'23-abcdef','forest','natural',5,5);   
+
+  
+
+INSERT INTO APARTMENT    
+
+  
+
+   
+
+  
+
+(FLOOR,AREA,POSITION,dimensions_,A_ID,price,number_of_path_rooms,number_of_rooms,SOLD)   
+
+  
+
+   
+
+  
+
+values   
+
+  
+
+   
+
+  
+
+(1,150,'SEA',30*40,1,540000,2,2,'Y'),   
+
+  
+
+   
+
+  
+
+(2,200,'mall',50*40,2,7000000,1,3,'N'),   
+
+  
+
+   
+
+  
+
+(3,250,'nail',60*40,3,490000,2,3,'Y'),   
+
+  
+
+   
+
+  
+
+(4,350,'SEA2',70*40,4,900000,2,5,'N'),   
+
+  
+
+   
+
+  
+
+(5,70,'forest',30*40,5,300000,1,1,'Y'),   
+
+  
+
+   
+
+  
+
+(6,75,'SEA',40*40,6,100000,1,2,'N'),   
+
+  
+
+   
+
+  
+
+(7,150,'mall',30*60,7,250000,2,2,'Y'),   
+
+  
+
+   
+
+  
+
+(8,200,'nail',30*50,8,200000,1,3,'N'),   
+
+  
+
+   
+
+  
+
+(9,100,'SEA2',30*40,9,150000,1,2,'Y'),   
+
+  
+
+   
+
+  
+
+(10,300,'forest',70*45,10,1000000,2,4,'N');    
+
+  
+
+INSERT INTO CONTRACT (installment,amounts,date,co_id,COUNT)   
+
+VALUES( 'y',60000,'2002-1-19',123,5),    
+
+( 'y',90000,'2002-1-19',1234,6),
+( 'y',70000,'2002-2-19',126,7),  
+
+( 'n',50000,'2002-2-19',127,3);  
+
+  
+
+  
+
+INSERT INTO COUSTMER(c_id,c_name,JOP) VALUES (123,'mohamed','director'),(125,'ahmed','actor') 
+
+(126,'FADY','DOCTOR'),(127,'OMAR','ENGRINING');
